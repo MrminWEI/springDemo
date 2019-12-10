@@ -1,9 +1,11 @@
 package com.example.demo.biz.user.service.impl;
 
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.example.demo.biz.user.entity.Menu;
 import com.example.demo.biz.user.mapper.MenuMapper;
 import com.example.demo.biz.user.service.MenuService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
+  @Autowired
+  private MenuMapper mapper;
+
+  @Override
+  public List<Menu> getPermissionByUserId(Integer userId) {
+    return mapper.getPermissionByUserId(userId);
+  }
 }
