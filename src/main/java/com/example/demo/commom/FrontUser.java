@@ -1,15 +1,30 @@
 package com.example.demo.commom;
 
 
-import lombok.Data;
+import com.example.demo.biz.user.entity.Menu;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import lombok.Data;
 
 @Data
 public class FrontUser implements Serializable {
 
-    public Long userId;
+    private Integer userId;
 
-    public String userNo;
+    private String userName;
+
+    private Integer userOrder;
+
+    private Integer userType;
+
+    private Integer userStatus;
+
+    private String userPwd;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     private String realName;
 
@@ -19,8 +34,7 @@ public class FrontUser implements Serializable {
 
     private Integer sex;
 
-    private Long deptId;
+    private Integer deptId;
 
-    private String enterprisesName;
-
+    private List<Menu> menus;
 }
