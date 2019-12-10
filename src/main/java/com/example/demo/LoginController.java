@@ -1,13 +1,17 @@
 package com.example.demo;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.biz.user.entity.User;
+import com.example.demo.commom.FrontUser;
 import com.example.demo.jwt.JwtAuthenticationRequest;
 import com.example.demo.jwt.JwtAuthenticationResponse;
 import com.example.demo.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -32,7 +36,8 @@ public class LoginController {
 
     @GetMapping(value = "/user/{token}")
     public ResponseEntity<?> getUserInfo(@PathVariable String  token) {
-      User user  = loginService.getUserNameByToken(token);
+//      User user  = loginService.getUserNameByToken(token);
+      FrontUser user = loginService.getUserInfo(token);
         if (user == null){
             return ResponseEntity.status(401).body(false);
         }

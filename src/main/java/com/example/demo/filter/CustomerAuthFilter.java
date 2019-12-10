@@ -5,21 +5,25 @@ import com.example.demo.biz.user.entity.User;
 import com.example.demo.jwt.TokenErrorResponse;
 import com.example.demo.service.LoginService;
 import com.google.common.collect.Sets;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 // 定义filterName 和过滤的url
-@WebFilter(filterName = "customerAuthFilter" ,urlPatterns = "/system/*")
+//@WebFilter(filterName = "customerAuthFilter" ,urlPatterns = "/system/*")
 public class CustomerAuthFilter implements Filter {
+
     Set<String> noUrl = Sets.newHashSet("/customer/login/");
     @Autowired
     private LoginService authService;

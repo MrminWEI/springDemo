@@ -2,18 +2,22 @@ package com.example.demo.service;
 
 import com.baomidou.mybatisplus.mapper.Condition;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.example.demo.biz.user.entity.Menu;
 import com.example.demo.biz.user.entity.User;
+import com.example.demo.biz.user.service.MenuService;
 import com.example.demo.biz.user.service.UserService;
+import com.example.demo.commom.FrontUser;
 import com.example.demo.jwt.JwtAuthenticationRequest;
 import com.example.demo.jwt.JwtAuthenticationResponse;
 import com.example.demo.jwt.TokenUtils;
 import com.example.demo.utils.MD5Encoder;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * LoginService
@@ -25,11 +29,15 @@ import java.util.List;
 @Service
 public class LoginService {
 
-    @Value("${gate.jwt.header}")
+    @Value("${gate:jwt:header}")
     private String headerToken;
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    MenuService menuService;
+
 
     @Autowired
     TokenUtils tokenUtils;
@@ -67,6 +75,26 @@ public class LoginService {
 
     public User getUser(String userName) {
         return userService.selectOne(Condition.<User>wrapper().eq("USER_NAME", userName).eq("CUSTOMER_STATUS", "1"));
+    }
+
+    public FrontUser getUserInfo(String token) {
+        User user = tokenUtils.getUsernameFromToken(token);
+        if (user == null) {
+            return null;
+        } else {
+            FrontUser frontUser = new FrontUser();
+            BeanUtils.copyProperties(user, frontUser);
+            List<Menu> menuList = menuService
+                .getPermissionByUserId(Integer.valueOf(user.getUserId()));
+            List<Menu> menus = new ArrayList<>();
+            for (Menu per : menuList) {
+                if (per.getMenuLevel() < 3) {
+                    menus.add(per);
+                }
+            }
+            frontUser.setMenus(menus);
+            return frontUser;
+        }
     }
 
     public User getSession(HttpServletRequest req) {
