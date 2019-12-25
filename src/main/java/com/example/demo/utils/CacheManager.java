@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Maps;
-
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -14,8 +13,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class CacheManager {
     //缓存的组统一写这里
-    public static final String GROUP_SESSION = "GROUP_SESSION";
-    public static final String GROUP_TOKEN = "GROUP_TOKEN";
     public static final String GROUP_CUSTOMER_TOKEN = "GROUP_CUSTOMER_TOKEN";
     private static final Map<String, LoadingCache<String, Optional>> LOADINGCACHES = Maps.newHashMap();
     private static final CacheManager INSTANCE = new CacheManager();
@@ -23,7 +20,7 @@ public class CacheManager {
 
     private CacheManager(){}
 
-    public static CacheManager me(){
+    public static CacheManager instance() {
         return INSTANCE;
     }
 

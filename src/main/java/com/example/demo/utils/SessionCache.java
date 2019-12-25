@@ -1,16 +1,17 @@
 package com.example.demo.utils;
 
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SessionCache {
 
     @PostConstruct
     public void init(){
-        CacheManager.me().buildLoadingCache(CacheManager.GROUP_CUSTOMER_TOKEN, 50, 60, TimeUnit.MINUTES, new CacheLoadHandler<String>() {
+        CacheManager.instance()
+            .buildLoadingCache(CacheManager.GROUP_CUSTOMER_TOKEN, 50, 60, TimeUnit.MINUTES,
+                new CacheLoadHandler<String>() {
             @Override
             public String load(String key) {
                 return null;
@@ -19,15 +20,15 @@ public class SessionCache {
     }
 
     public String getToken(String key){
-        return CacheManager.me().get(CacheManager.GROUP_CUSTOMER_TOKEN, key);
+        return CacheManager.instance().get(CacheManager.GROUP_CUSTOMER_TOKEN, key);
     }
 
     public void setToken(String key, String value){
-        CacheManager.me().put(CacheManager.GROUP_CUSTOMER_TOKEN, key, value);
+        CacheManager.instance().put(CacheManager.GROUP_CUSTOMER_TOKEN, key, value);
     }
 
     public void clearToken(String key){
-        CacheManager.me().invalidate(CacheManager.GROUP_CUSTOMER_TOKEN, key);
+        CacheManager.instance().invalidate(CacheManager.GROUP_CUSTOMER_TOKEN, key);
     }
 
     public static void main(String[] args){

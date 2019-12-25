@@ -37,7 +37,7 @@ public class LoginAspect {
    * @author : minwei
    * @date : 2019/12/10 15:39
    */
-  @Pointcut("execution(public * com.example.demo.LoginController.login(..))")
+  @Pointcut("@annotation(com.example.demo.annotation.AutoLog)")
   public void loginLog() {
   }
 
