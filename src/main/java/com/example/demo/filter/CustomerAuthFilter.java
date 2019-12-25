@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 // 定义filterName 和过滤的url
-//@WebFilter(filterName = "customerAuthFilter" ,urlPatterns = "/system/*")
+//@WebFilter(filterName = "customerAuthFilter", urlPatterns = "/system/*")
 public class CustomerAuthFilter implements Filter {
 
     Set<String> noUrl = Sets.newHashSet("/customer/login/");

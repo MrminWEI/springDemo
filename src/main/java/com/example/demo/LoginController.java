@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.annotation.AutoLog;
 import com.example.demo.commom.FrontUser;
 import com.example.demo.jwt.JwtAuthenticationRequest;
 import com.example.demo.jwt.JwtAuthenticationResponse;
@@ -27,6 +28,7 @@ public class LoginController {
     LoginService loginService;
 
 
+  @AutoLog
     @RequestMapping(value ="/login")
     public ResponseEntity<?> login(@RequestBody JwtAuthenticationRequest jwtAuthenticationRequest) {
         System.out.println(JSONObject.toJSON(jwtAuthenticationRequest));
@@ -36,7 +38,6 @@ public class LoginController {
 
     @GetMapping(value = "/user/{token}")
     public ResponseEntity<?> getUserInfo(@PathVariable String  token) {
-//      User user  = loginService.getUserNameByToken(token);
       FrontUser user = loginService.getUserInfo(token);
         if (user == null){
             return ResponseEntity.status(401).body(false);
@@ -44,6 +45,5 @@ public class LoginController {
         else{
             return ResponseEntity.ok(user);
         }
-
     }
 }

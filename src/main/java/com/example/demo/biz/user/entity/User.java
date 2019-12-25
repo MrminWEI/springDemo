@@ -1,12 +1,15 @@
 package com.example.demo.biz.user.entity;
 
-import com.baomidou.mybatisplus.enums.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.example.demo.annotation.Dept;
+import com.example.demo.annotation.Dict;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -34,15 +37,18 @@ public class User extends Model<User> {
     private Integer userType;
 
     @TableField("USER_STATUS")
+    @Dict(dicCode = "状态")
     private Integer userStatus;
 
     @TableField("USER_PWD")
     private String userPwd;
 
     @TableField("CREATE_TIME")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @TableField("UPDATE_TIME")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     @TableField("REAL_NAME")
@@ -55,9 +61,11 @@ public class User extends Model<User> {
     private String mobile;
 
     @TableField("SEX")
+    @Dict(dicCode = "性别")
     private Integer sex;
 
     @TableField("DEPT_ID")
+    @Dept
     private Integer deptId;
 
     public Integer getUserId() {
