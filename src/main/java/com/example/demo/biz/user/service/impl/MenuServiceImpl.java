@@ -5,6 +5,7 @@ import com.example.demo.biz.user.entity.Menu;
 import com.example.demo.biz.user.mapper.MenuMapper;
 import com.example.demo.biz.user.service.MenuService;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
-  @Autowired
+  @Resource
   private MenuMapper mapper;
 
   @Override

@@ -14,7 +14,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
  * @version 1.0
  * @since 2019/12/23
  */
-@Configuration
+//@Configuration
 public class WebMvcConfiguration {
 
   @Bean
@@ -26,7 +26,7 @@ public class WebMvcConfiguration {
   public FilterRegistrationBean filterRegistrationCustomer() {
     FilterRegistrationBean registrationBean = new FilterRegistrationBean();
     registrationBean.setFilter(new DelegatingFilterProxy("customerAuthFilter"));
-    registrationBean.addUrlPatterns("/system/*");
+    registrationBean.addUrlPatterns("/customer/*");
     registrationBean.setName("customerAuthFilter");
     return registrationBean;
   }

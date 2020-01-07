@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.example.demo.biz.user.entity.Detail;
 import com.example.demo.biz.user.mapper.DetailMapper;
 import com.example.demo.biz.user.service.DetailService;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class DetailServiceImpl extends ServiceImpl<DetailMapper, Detail> implements
     DetailService {
 
-  @Autowired
+  @Resource
   DetailMapper mapper;
 
   @Override
