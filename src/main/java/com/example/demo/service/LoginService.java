@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class LoginService {
 
-    @Value("${gate:jwt:header}")
+    @Value("${gate.jwt.header}")
     private String headerToken;
 
     @Autowired
